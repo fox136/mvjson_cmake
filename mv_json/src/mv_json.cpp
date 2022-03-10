@@ -1,6 +1,7 @@
 ﻿#include "mv_json.h"
 #include <cstring>
 #include <iostream>
+#include<algorithm>
 
 std::string CMvJson::strLog = "";
 
@@ -57,6 +58,67 @@ std::string CMvJson::GetString(void)  // 获取字符串，如果不是字符串
         return m_strData;
     }
     return "";
+}
+
+int CMvJson::GetInt(void)
+{
+    if (OBJ_TYPE_DOUBLE == this->m_nObjType)
+    {
+        return atoi(m_strData.c_str());
+    }
+    return 0;
+}
+
+long CMvJson::GetLong(void)
+{
+    if (OBJ_TYPE_DOUBLE == this->m_nObjType)
+    {
+        return atol(m_strData.c_str());
+    }
+    return 0;
+}
+
+float CMvJson::GetFloat(void)
+{
+    if (OBJ_TYPE_DOUBLE == this->m_nObjType)
+    {
+        return atof(m_strData.c_str());
+    }
+    return 0;
+}
+
+double CMvJson::GetDouble(void)
+{
+    if (OBJ_TYPE_DOUBLE == this->m_nObjType)
+    {
+        return atof(m_strData.c_str());
+    }
+    return 0;
+}
+
+bool CMvJson::GetBool(void)
+{
+    if (OBJ_TYPE_BOOL == this->m_nObjType)
+    {
+        std::string str = m_strData;
+        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        return str == "true";
+    }
+    return false;
+}
+
+void* CMvJson::GetNull(void)
+{
+    if (OBJ_TYPE_NULL == this->m_nObjType)
+    {
+        std::string str = m_strData;
+        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        if (str == "null")
+        {
+            return NULL;
+        }
+    }
+    return this;
 }
 
 int CMvJson::GetType(void) // 获取对象类型

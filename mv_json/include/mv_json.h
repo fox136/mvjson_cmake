@@ -77,6 +77,13 @@ public:
     int pop_back(void); // 删除数组对象最后一个元素
 
     std::string GetString(void); // 获取字符串类型对象的字符串
+    int GetInt(void);
+    long GetLong(void);
+    float GetFloat(void);
+    double GetDouble(void);
+    bool GetBool(void);
+    void* GetNull(void);
+
     std::string GetStringPro(void); // 获取任意类型对象字符串
     int GetType(void); // 获取对象类型
     int size(void); // 获取元素个数
